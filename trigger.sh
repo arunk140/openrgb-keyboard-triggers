@@ -1,9 +1,9 @@
 #!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-SCRIPT_DIR="/home/arun/Documents/openrgb-triggers/"
-STATE_FILE=$SCRIPT_DIR".plugin_state"
-CONDA_ENV=$SCRIPT_DIR"conda"
-PYTHON_SCRIPT=$SCRIPT_DIR"plugin.py"
+STATE_FILE=$SCRIPT_DIR"/.plugin_state"
+CONDA_ENV=$SCRIPT_DIR"/conda"
+PYTHON_SCRIPT=$SCRIPT_DIR"/plugin.py"
 
 run_python_script() {
     eval "$(conda shell.bash hook)"
