@@ -16,14 +16,23 @@ if [ ! -f "$STATE_FILE" ]; then
     echo "sleep" > "$STATE_FILE"
 fi
 
-CURRENT_STATE=$(cat "$STATE_FILE")
+MODE="toggle"
 
-if [ "$CURRENT_STATE" = "sleep" ]; then
-    run_python_script "--wake"
-    echo "wake" > "$STATE_FILE"
-    echo "Switched to wake mode"
-else
-    run_python_script "--sleep"
-    echo "sleep" > "$STATE_FILE"
-    echo "Switched to sleep mode"
+if [ "$1" = "--wake" ]; then
+    MODE="wake"
+elif [ "$1" = "--sleep" ]; then
+    MODE="sleep"
 fi
+
+if [ "$MODE" = "toggle" ]; then
+    CURRENT_STATE=$(cat "$STATE_FILE")
+    if [ "$CURRENT_STATE" = "sleep" ]; then
+        MODE="wake"
+    else
+        MODE="sleep"
+    fi
+fi
+
+run_python_script "--$MODE"
+echo "$MODE" > "$STATE_FILE"
+echo "Switched to $MODE mode"
