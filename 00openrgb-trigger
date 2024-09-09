@@ -1,0 +1,31 @@
+#!/bin/bash
+
+trigger_script="/home/arun/Documents/openrgb-triggers/trigger.sh"
+
+run_trigger() {
+    local mode="$1"
+    if [ "$mode" = "sleep" ]; then
+        "$trigger_script" --sleep
+    elif [ "$mode" = "wake" ]; then
+        "$trigger_script" --wake
+    else
+        echo "Invalid mode: $mode" >&2
+        exit 1
+    fi
+}
+
+case $1 in
+    pre)
+        run_trigger sleep
+        ;;
+    post)
+        if grep -q 0 /sys/class/power_supply/ADP1/online; then
+            run_trigger wake
+        else
+            run_trigger wake
+        fi
+        ;;
+esac
+
+exit 0
+

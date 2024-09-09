@@ -1,10 +1,13 @@
-
 ## Setup
 
 ```
 conda create --prefix ./conda/ python=3.10
 conda activate ./conda/
 pip install -r requirements.txt
+```
+
+```
+cp 00openrgb-trigger /usr/lib/systemd/system-sleep/00openrgb-trigger
 ```
 
 ## Usage
