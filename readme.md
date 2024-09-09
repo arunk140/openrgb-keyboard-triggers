@@ -6,6 +6,9 @@ conda activate ./conda/
 pip install -r requirements.txt
 ```
 
+Update 00openrgb-trigger ith the path to your trigger.sh script and copy it to the systemd sleep directory.
+Also update /sys/class/power_supply/ADP1/online to the path of your power supply.
+
 ```
 cp 00openrgb-trigger /usr/lib/systemd/system-sleep/00openrgb-trigger
 ```
